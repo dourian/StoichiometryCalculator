@@ -16,6 +16,7 @@ public class chem extends constants{
 				System.out.println("Goodbye");
 				break;
 			} else if (choice < -1) {
+				System.out.println("Try again, invalid");
 				continue;
 			} else if (choice == 1) {
 				System.out.println("Enter number of moles");
