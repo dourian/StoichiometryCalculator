@@ -8,19 +8,29 @@ public class chem extends constants{
 	static StringTokenizer st;
 
 	public static void main(String[] args) throws IOException {
-		
-		
-		
-        Scanner sc = new Scanner(System.in);
-        // double moles = sc.nextDouble();
-        // molestoParticles(moles);
-        String formula = sc.nextLine();
-        gtoParticles(formula, 0.0);
-        
-        
-        
-        
-        
+		System.out.println("Exit code: -1");
+		while (true) {
+			System.out.println("Type 1 for moles->particles, 2 for g->particles.");
+			int choice = readInt();
+			if (choice == -1) {
+				System.out.println("Goodbye");
+				break;
+			} else if (choice < -1) {
+				continue;
+			} else if (choice == 1) {
+				System.out.println("Enter number of moles");
+				double moles = readDouble();
+				molestoParticles(moles);
+			} else if (choice == 2) {
+				try {
+					gtoParticles();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}    
 	}
 	
 	// FIRST PROBLEM: CONVERT MOLES TO PARTICLES
@@ -34,43 +44,46 @@ public class chem extends constants{
             N /=10;
             count++;
            }while (N > 10);
-        }else if (N < 10) {
+        } else if (N < 0) {
            do {
             N *=10;
-            count++;
+            count--;
            } while (N < 10);
         }
         int exponent = 23 + count;
         System.out.printf("Number of particles: %f * 10e%d\n", N, exponent);
         return;
     }
-    // SECOND PROBLEM (EXT OF FIRST) GRAMS TO PARTICLES
-    public static void gtoParticles(String formula, double mass){
+    // SECOND PROBLEM: (EXT OF FIRST) GRAMS TO PARTICLES
+    // issues: must enter the number of the element not just the element, might fix this later?
+    public static void gtoParticles() throws Exception{
         // divide the g by MM, find mm
+    	System.out.println("Make sure formatting goes as follows: CH4 is formatted as C 1 H 4");
+    	System.out.println("Enter your chemical formula");
+    	String st[] = readLine().split(" ");
+    	System.out.println("Enter your mass in grams");
+    	double mass = readDouble();
         ArrayList<String> elements = new ArrayList<String>();
         ArrayList<Integer> amount = new ArrayList<Integer>();
-        String elmName = "";
-        String elmCount = "";
-        for (int i = 0; i < formula.length();++i) {
-            char cur = formula.charAt(i);
-            System.out.println(cur);
-            if (cur == ' ') {
-                if (elmCount.equals("")){
-                    elements.add(elmName);
-                } else if (elmName.equals("")){
-                    int amountInt = Integer.parseInt(elmCount);
-                    amount.add(amountInt);
-                }
-                elmName = "";
-                elmCount = "";
-            } else if (cur < 58) {
-                elmCount+=cur;
-            } else if (cur > 58) {
-                elmName+=cur;
-            }
+        int count = 0;
+        for (String i : st) {
+        	if (count%2 == 0) {
+        		elements.add(i);
+        	} else {
+        		amount.add(Integer.parseInt(i));
+        	}
+        	count++;
         }
-        System.out.println(elements);
-        System.out.println(amount);
+        double MM = 0.0;
+        for (int i = 0; i<amount.size();++i) {
+        	String curElm = elements.get(i);
+        	int elmAmount = amount.get(i);
+        	int index = Arrays.asList(ele).indexOf(curElm);
+        	MM += elmAmount*gmol[index];
+        }
+        // n = m / MM
+        double n = mass / MM;
+        molestoParticles(n);
         return;
     }
 
