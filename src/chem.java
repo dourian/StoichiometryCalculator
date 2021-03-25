@@ -33,8 +33,10 @@ public class chem extends constants{
 		} 
 		/* TO DO LIST:
 		 * 1. particles to moles, particles to grams
+		 * 2. ions 
+		 * 3. input formatting and such
+		 * 4. SI unit conversio
 		 */
-		
 	}
 	
 	// FIRST PROBLEM: CONVERT MOLES TO PARTICLES
