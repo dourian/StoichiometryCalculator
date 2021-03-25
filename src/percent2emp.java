@@ -5,7 +5,6 @@ public class percent2emp extends constants{
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static PrintWriter pr = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 	static StringTokenizer st;
-
 	public static void main(String[] args) throws IOException {
 		while (true) {
 			System.out.println("1. % -> empirical\n2. empirical -> %\n3. stop");
