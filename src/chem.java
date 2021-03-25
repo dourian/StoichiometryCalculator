@@ -1,17 +1,29 @@
 import java.util.*;
-import java.math.*;
-// hi
-// hello
-// whats up
+import java.io.*;
+
 public class chem extends constants{
-    public static void main(String[] args) {
+    
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static PrintWriter pr = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+	static StringTokenizer st;
+
+	public static void main(String[] args) throws IOException {
+		
+		
+		
         Scanner sc = new Scanner(System.in);
         // double moles = sc.nextDouble();
         // molestoParticles(moles);
         String formula = sc.nextLine();
         gtoParticles(formula, 0.0);
-    }
-     // FIRST PROBLEM: CONVERT MOLES TO PARTICLES
+        
+        
+        
+        
+        
+	}
+	
+	// FIRST PROBLEM: CONVERT MOLES TO PARTICLES
     static void molestoParticles(double moles){
         double N = moles * AVAGADROS_CONSTANT;
         // we are counting number of decimal places to have smaller calculations
@@ -61,4 +73,30 @@ public class chem extends constants{
         System.out.println(amount);
         return;
     }
+
+	static String next() throws IOException {
+		while (st == null || !st.hasMoreTokens())
+			st = new StringTokenizer(br.readLine().trim());
+		return st.nextToken();
+	}
+
+	static long readLong() throws IOException {
+		return Long.parseLong(next());
+	}
+
+	static int readInt() throws IOException {
+		return Integer.parseInt(next());
+	}
+
+	static double readDouble() throws IOException {
+		return Double.parseDouble(next());
+	}
+
+	static char readCharacter() throws IOException {
+		return next().charAt(0);
+	}
+
+	static String readLine() throws IOException {
+		return br.readLine().trim();
+	}
 }

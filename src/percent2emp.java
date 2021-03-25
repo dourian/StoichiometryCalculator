@@ -8,7 +8,7 @@ public class percent2emp extends constants{
 
 	public static void main(String[] args) throws IOException {
 		while (true) {
-			System.out.println("1. % -> emp\n2. emp -> %\n3. stop");
+			System.out.println("1. % -> empirical\n2. empirical -> %\n3. stop");
 			int choice = readInt();
 			if (choice==1) {
 				p2e();
