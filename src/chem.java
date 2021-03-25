@@ -30,8 +30,11 @@ public class chem extends constants{
 					e.printStackTrace();
 				}
 			}
-			
-		}    
+		} 
+		/* TO DO LIST:
+		 * 1. particles to moles, particles to grams
+		 */
+		
 	}
 	
 	// FIRST PROBLEM: CONVERT MOLES TO PARTICLES
