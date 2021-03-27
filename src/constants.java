@@ -15,7 +15,12 @@ public class constants {
                                     175.0,178.5,180.9,183.8,186.2,190.2,192.2,195.1,197.0,200.6,204.4,207.2,209.0,209,210,222,223,226,227,232.0,
                                     231.0,238.0,237,244,243,247,247,251,252,257,258,259,262,267,268,271,272,270,276,281,280,285,284,289,288,
                                     293,292,294};
-
+    
+    // the multiply to convert to grams?
+    public static double SIConv[] = {1000000.0, 1000.0, 0.001, 0.000001, 0.000000001};
+    
+    // ug (microgram is wrong?? i dont know, symbol is rly weird)
+    public static String SINames[] = {"t", "kg", "mg", "ug", "ng"};
     
     // multiplied by 10e23 but exponent laws 
     public static double AVAGADROS_CONSTANT = 6.022;

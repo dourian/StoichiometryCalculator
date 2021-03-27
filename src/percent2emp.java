@@ -22,6 +22,7 @@ public class percent2emp extends constants{
 				break;
 			}
 		}
+		
 	}
 
 	public static void p2e () throws IOException {
