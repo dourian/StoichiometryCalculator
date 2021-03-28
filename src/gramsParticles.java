@@ -41,6 +41,7 @@ public class gramsParticles extends constants{
 		 * 2. ions 
 		 * 3. input formatting and such
 		 * 4. SI unit conversion
+		 * 5. percentage comp
 		 */
 	}
 	
@@ -50,16 +51,15 @@ public class gramsParticles extends constants{
         // we are counting number of decimal places to have smaller calculations
         // without the hassle of such large numbers like 10e23
         int count = 0;
-        if (N > 10) {
-           do {
+        while (N > 10) {
             N /=10;
             count++;
-           }while (N > 10);
-        } else if (N < 0) {
-           do {
+        }
+        
+        while (N < 1) {
             N *=10;
             count--;
-           } while (N < 10);
+           
         }
         int exponent = 23 + count;
         System.out.printf("Number of particles: %f * 10e%d\n", N, exponent);
