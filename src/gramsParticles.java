@@ -10,7 +10,12 @@ public class gramsParticles extends constants{
 	public static void main(String[] args) throws IOException {
 		System.out.println("Exit code: -1");
 		while (true) {
-			System.out.println("Type 1 for moles->particles, 2 for g->particles, 3 for molar mass ONLY");
+			System.out.println("Type 1 for moles->particles, 2 for <si unit>->particles, 3 for molar mass ONLY");
+			System.out.println("1. moles->particles/atoms");
+			System.out.println("2. <any MASS si unit> ->particles/atoms");
+			System.out.println("3. molar mass ONLY");
+			System.out.println("4. unit conversion ONLY");
+			System.out.println("5. particles to moles");
 			int choice = readInt();
 			if (choice == -1) {
 				System.out.println("Goodbye");
@@ -34,14 +39,22 @@ public class gramsParticles extends constants{
 		    	System.out.println("Enter your chemical formula");
 		    	String st[] = readLine().split(" ");
 		    	System.out.printf("Your molar mass is %f\n", MMcalc(st));
+			} else if (choice == 4) {
+				SIConversion();
+			} else if (choice == 5) {
+				System.out.println("Please enter the number of particles in scientific notation.");
+				System.out.println("Enter the decimal before the multiplication of 10.");
+				double val = readDouble();
+				System.out.println("Enter the exponent ONLY (eg, 10*23 only enter 23)");
+				int exponent = readInt();
+				
 			}
 		} 
 		/* TO DO LIST:
 		 * 1. particles to moles, particles to grams
 		 * 2. ions 
 		 * 3. input formatting and such
-		 * 4. SI unit conversion
-		 * 5. percentage comp
+		 * 4. percentage comp
 		 */
 	}
 	
@@ -72,9 +85,14 @@ public class gramsParticles extends constants{
     	System.out.println("Make sure formatting goes as follows: CH4 is formatted as C 1 H 4");
     	System.out.println("Enter your chemical formula");
     	String st[] = readLine().split(" ");
-    	System.out.println("Enter your mass in grams");
-    	double mass = readDouble();
-
+    	System.out.println("Is your mass in grams? (y/n)");
+    	char cond = readCharacter();
+    	double mass= 0;
+    	if (cond == 'y') {
+    		mass = readDouble();
+    	} else {
+    		mass = SIConversion();
+    	}
         // n = m / MM
         double n = mass / MMcalc(st);
         molestoParticles(n);
@@ -102,7 +120,45 @@ public class gramsParticles extends constants{
         }
     	return MM;
     }
-
+    // WORKING SI CONVERSION :) 
+    public static double SIConversion() throws IOException {
+    	System.out.println("Enter the numeric amount of this unit.");
+		double rawMass = readDouble();
+		System.out.println("Please note the formatting:");
+		System.out.println("tonnes->t");
+		System.out.println("kilograms->kg");
+		System.out.println("milligrams->mg");
+		System.out.println("micrograms->ug");
+		System.out.println("nanograms->ng");
+		String unit = next();
+		int idx = Arrays.asList(SINames).indexOf(unit);
+		double convRate = SIConv[idx];
+		double mass = rawMass*convRate;
+		double MASS = mass;
+       int count = 0;
+       if (mass <= 0.001 || mass >= 1000) {
+	        while (mass > 10) {
+	            mass /=10;
+	            count++;
+	        }
+	        
+	        while (mass < 1) {
+	            mass *=10;
+	            count--;
+	           
+	        }
+       }
+		System.out.printf("The mass is %f * 10e%d g\n", mass, count);
+    	return MASS;
+    }
+    // wip
+    public static void particles2Moles(double val, int exponent) {
+    	
+    }
+    // wip
+    public static void particles2Grams() {
+    	
+    }
 	static String next() throws IOException {
 		while (st == null || !st.hasMoreTokens())
 			st = new StringTokenizer(br.readLine().trim());
