@@ -7,24 +7,6 @@ public class percent2emp extends constants{
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static PrintWriter pr = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 	static StringTokenizer st;
-	public static void main(String[] args) throws IOException {
-		while (true) {
-			System.out.println("1. % -> empirical\n2. empirical -> %\n3. stop");
-			int choice = readInt();
-			if (choice==1) {
-				p2e();
-			}
-			else if (choice==2){
-				e2p();
-			}
-			else if (choice==3) {
-				System.out.println("Goodbye!");
-				break;
-			}
-		}
-		
-	}
-
 	public static void p2e () throws IOException {
 		System.out.println("How many distinct elements?");
 		int n = readInt();

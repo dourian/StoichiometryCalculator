@@ -1,21 +1,25 @@
 import java.util.*;
 import java.io.*;
 
-public class gramsParticles extends constants{
-    
+public class Main extends constants{
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static PrintWriter pr = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 	static StringTokenizer st;
 	static SIConversion conversion;
+	static unittoX convert;
+	static percent2emp p2e2p;
+	
 	public static void main(String[] args) throws IOException {
 		System.out.println("Exit code: -1");
 		while (true) {
 			System.out.println("Type 1 for moles->particles, 2 for <si unit>->particles, 3 for molar mass ONLY");
 			System.out.println("1. moles->particles/atoms");
-			System.out.println("2. <any MASS si unit> ->particles/atoms");
+			System.out.println("2. <any MASS si unit>->particles/atoms");
 			System.out.println("3. molar mass ONLY");
 			System.out.println("4. unit conversion ONLY");
-			System.out.println("5. particles to moles");
+			System.out.println("5. particles->moles");
+			System.out.println("6. empiral->%");
+			System.out.println("7. %->empirical");
 			int choice = readInt();
 			if (choice == -1) {
 				System.out.println("Goodbye");
@@ -26,10 +30,10 @@ public class gramsParticles extends constants{
 			} else if (choice == 1) {
 				System.out.println("Enter number of moles");
 				double moles = readDouble();
-				molestoParticles(moles);
+				unittoX.molestoParticles(moles);
 			} else if (choice == 2) {
 				try {
-					gtoParticles();
+					unittoX.gtoParticles();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -38,7 +42,7 @@ public class gramsParticles extends constants{
 		    	System.out.println("Make sure formatting goes as follows: CH4 is formatted as C 1 H 4");
 		    	System.out.println("Enter your chemical formula");
 		    	String st[] = readLine().split(" ");
-		    	System.out.printf("Your molar mass is %fg/mol\n", molarMass.MMcalc(st));
+		    	System.out.printf("Your molar mass is %f g/mol\n", molarMass.MMcalc(st));
 			} else if (choice == 4) {
 				SIConversion.convert();
 			} else if (choice == 5) {
@@ -47,6 +51,11 @@ public class gramsParticles extends constants{
 				double val = readDouble();
 				System.out.println("Enter the exponent ONLY (eg, 10*23 only enter 23)");
 				int exponent = readInt();
+			} else if (choice == 6) {
+				percent2emp.p2e();
+			} else if (choice == 7) {
+				percent2emp.e2p();
+			} else if (choice == 8) {
 				
 			}
 		} 
@@ -58,46 +67,6 @@ public class gramsParticles extends constants{
 		 */
 	}
 	
-	// FIRST PROBLEM: CONVERT MOLES TO PARTICLES
-    public static void molestoParticles(double moles){
-        double N = moles * AVAGADROS_CONSTANT;
-        // we are counting number of decimal places to have smaller calculations
-        // without the hassle of such large numbers like 10e23
-        int count = 0;
-        while (N > 10) {
-            N /=10;
-            count++;
-        }
-        
-        while (N < 1) {
-            N *=10;
-            count--;
-           
-        }
-        int exponent = 23 + count;
-        System.out.printf("Number of particles: %f * 10e%d\n", N, exponent);
-        return;
-    }
-    // SECOND PROBLEM: (EXT OF FIRST) GRAMS TO PARTICLES
-    // issues: must enter the number of the element not just the element, might fix this later?
-    public static void gtoParticles() throws Exception{
-        // divide the g by MM, find mm
-    	System.out.println("Make sure formatting goes as follows: CH4 is formatted as C 1 H 4");
-    	System.out.println("Enter your chemical formula");
-    	String st[] = readLine().split(" ");
-    	System.out.println("Is your mass in grams? (y/n)");
-    	char cond = readCharacter();
-    	double mass= 0;
-    	if (cond == 'y') {
-    		mass = readDouble();
-    	} else {
-    		mass = SIConversion.convert();
-    	}
-        // n = m / MM
-        double n = mass / molarMass.MMcalc(st);
-        molestoParticles(n);
-        return;
-    }
     // wip
     public static void particles2Moles(double val, int exponent) {
     	
