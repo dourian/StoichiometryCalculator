@@ -6,7 +6,7 @@ public class gramsParticles extends constants{
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static PrintWriter pr = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 	static StringTokenizer st;
-
+	static SIConversion conversion;
 	public static void main(String[] args) throws IOException {
 		System.out.println("Exit code: -1");
 		while (true) {
@@ -38,9 +38,9 @@ public class gramsParticles extends constants{
 		    	System.out.println("Make sure formatting goes as follows: CH4 is formatted as C 1 H 4");
 		    	System.out.println("Enter your chemical formula");
 		    	String st[] = readLine().split(" ");
-		    	System.out.printf("Your molar mass is %f\n", MMcalc(st));
+		    	System.out.printf("Your molar mass is %fg/mol\n", molarMass.MMcalc(st));
 			} else if (choice == 4) {
-				SIConversion();
+				SIConversion.convert();
 			} else if (choice == 5) {
 				System.out.println("Please enter the number of particles in scientific notation.");
 				System.out.println("Enter the decimal before the multiplication of 10.");
@@ -91,65 +91,12 @@ public class gramsParticles extends constants{
     	if (cond == 'y') {
     		mass = readDouble();
     	} else {
-    		mass = SIConversion();
+    		mass = SIConversion.convert();
     	}
         // n = m / MM
-        double n = mass / MMcalc(st);
+        double n = mass / molarMass.MMcalc(st);
         molestoParticles(n);
         return;
-    }
-    // ORGANIZE: CALCULATE MOLAR MASS SEPARATELY 
-    public static double MMcalc(String st[]) {
-        ArrayList<String> elements = new ArrayList<String>();
-        ArrayList<Integer> amount = new ArrayList<Integer>();
-        int count = 0;
-        for (String i : st) {
-        	if (count%2 == 0) {
-        		elements.add(i);
-        	} else {
-        		amount.add(Integer.parseInt(i));
-        	}
-        	count++;
-        }
-        double MM = 0.0;
-        for (int i = 0; i<amount.size();++i) {
-        	String curElm = elements.get(i);
-        	int elmAmount = amount.get(i);
-        	int index = Arrays.asList(ele).indexOf(curElm);
-        	MM += elmAmount*gmol[index];
-        }
-    	return MM;
-    }
-    // WORKING SI CONVERSION :) 
-    public static double SIConversion() throws IOException {
-    	System.out.println("Enter the numeric amount of this unit.");
-		double rawMass = readDouble();
-		System.out.println("Please note the formatting:");
-		System.out.println("tonnes->t");
-		System.out.println("kilograms->kg");
-		System.out.println("milligrams->mg");
-		System.out.println("micrograms->ug");
-		System.out.println("nanograms->ng");
-		String unit = next();
-		int idx = Arrays.asList(SINames).indexOf(unit);
-		double convRate = SIConv[idx];
-		double mass = rawMass*convRate;
-		double MASS = mass;
-       int count = 0;
-       if (mass <= 0.001 || mass >= 1000) {
-	        while (mass > 10) {
-	            mass /=10;
-	            count++;
-	        }
-	        
-	        while (mass < 1) {
-	            mass *=10;
-	            count--;
-	           
-	        }
-       }
-		System.out.printf("The mass is %f * 10e%d g\n", mass, count);
-    	return MASS;
     }
     // wip
     public static void particles2Moles(double val, int exponent) {
