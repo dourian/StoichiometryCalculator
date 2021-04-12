@@ -36,46 +36,19 @@ public class unittoX extends constants{
         // divide the g by MM, find mm
     	System.out.println("Make sure formatting goes as follows: CH4 is formatted as C 1 H 4");
     	System.out.println("Enter your chemical formula");
-    	String st[] = readLine().split(" ");
+    	String st[] = reader.readLine().split(" ");
     	System.out.println("Is your mass in grams? (y/n)");
-    	char cond = readCharacter();
+    	char cond = reader.readCharacter();
     	double mass= 0;
     	if (cond == 'y') {
-    		mass = readDouble();
+    		System.out.println("Enter the mass in grams.");
+    		mass = reader.readDouble();
     	} else {
     		mass = SIConversion.convert();
     	}
         // n = m / MM
-    	System.out.println("Make sure formatting goes as follows: CH4 is formatted as C 1 H 4");
-    	System.out.println("Enter your chemical formula");
-    	String st_1[] = readLine().split(" ");
-        double n = mass / molarMass.MMcalc(st_1);
+        double n = mass / molarMass.MMcalc(st);
         molestoParticles(n);
         return;
     }
-	static String next() throws IOException {
-		while (st == null || !st.hasMoreTokens())
-			st = new StringTokenizer(br.readLine().trim());
-		return st.nextToken();
-	}
-
-	static long readLong() throws IOException {
-		return Long.parseLong(next());
-	}
-
-	static int readInt() throws IOException {
-		return Integer.parseInt(next());
-	}
-
-	static double readDouble() throws IOException {
-		return Double.parseDouble(next());
-	}
-
-	static char readCharacter() throws IOException {
-		return next().charAt(0);
-	}
-
-	static String readLine() throws IOException {
-		return br.readLine().trim();
-	}
 }
