@@ -9,21 +9,21 @@ public class percent2emp extends constants{
 	static StringTokenizer st;
 	public static void p2e () throws IOException {
 		System.out.println("How many distinct elements?");
-		int n = readInt();
+		int n = reader.readInt();
 		ArrayList<Integer> list = new ArrayList <Integer>();
 		ArrayList<Double> percent = new ArrayList <Double>();
 		ArrayList<Double> mols = new ArrayList <Double>();
 
 		for (int i=0;i<n;i++) {
 			System.out.println("Element "+(i+1)+": ");
-			String element = readLine();
+			String element = reader.readLine();
 			for (int j=0;j<ele.length;j++) {
 				if (ele[j].equals(element)) {
 					list.add(j);
 				}
 			}
 			System.out.println("Percentage: ");
-			percent.add(readDouble());
+			percent.add(reader.readDouble());
 			double a = percent.get(i)/gmol[list.get(i)];
 			mols.add(Math.round(a*100)/100.0);
 		}
@@ -44,21 +44,21 @@ public class percent2emp extends constants{
 	}
 	public static void e2p () throws IOException{
 		System.out.println("How many distinct elements?");
-		int n = readInt();
+		int n = reader.readInt();
 		ArrayList<Integer> list = new ArrayList <Integer>();
 		ArrayList<Integer> num = new ArrayList <Integer>();
 		ArrayList<Double> mass = new ArrayList <Double>();
 
 		for (int i=0;i<n;i++) {
 			System.out.println("Element "+(i+1)+": ");
-			String element = readLine();
+			String element = reader.readLine();
 			for (int j=0;j<ele.length;j++) {
 				if (ele[j].equals(element)) {
 					list.add(j);
 				}
 			}
 			System.out.println("#of element/mol: ");
-			num.add(readInt());
+			num.add(reader.readInt());
 			mass.add(num.get(i)*gmol[list.get(i)]);
 		}
 
@@ -72,31 +72,5 @@ public class percent2emp extends constants{
 			System.out.print("% ");
 		}
 		System.out.println("\n");
-	}
-
-	static String next() throws IOException {
-		while (st == null || !st.hasMoreTokens())
-			st = new StringTokenizer(br.readLine().trim());
-		return st.nextToken();
-	}
-
-	static long readLong() throws IOException {
-		return Long.parseLong(next());
-	}
-
-	static int readInt() throws IOException {
-		return Integer.parseInt(next());
-	}
-
-	static double readDouble() throws IOException {
-		return Double.parseDouble(next());
-	}
-
-	static char readCharacter() throws IOException {
-		return next().charAt(0);
-	}
-
-	static String readLine() throws IOException {
-		return br.readLine().trim();
 	}
 }

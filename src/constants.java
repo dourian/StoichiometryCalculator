@@ -24,5 +24,5 @@ public class constants {
     
     // multiplied by 10e23 but exponent laws 
     public static double AVAGADROS_CONSTANT = 6.022;
-    public static int AVAGADROS_EXPONENT = 22;
+    public static int AVAGADROS_EXPONENT = 23;
 }
