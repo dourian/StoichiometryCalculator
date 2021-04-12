@@ -5,11 +5,7 @@ public class Main extends constants{
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static PrintWriter pr = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 	static StringTokenizer st;
-	static SIConversion conversion;
-	static unittoX convert;
-	static percent2emp p2e2p;
-	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		System.out.println("Exit code: -1");
 		while (true) {
 			System.out.println("Type 1 for moles->particles, 2 for <si unit>->particles, 3 for molar mass ONLY");
@@ -18,46 +14,33 @@ public class Main extends constants{
 			System.out.println("3. molar mass ONLY");
 			System.out.println("4. unit conversion ONLY");
 			System.out.println("5. particles->moles");
-			System.out.println("6. empiral->%");
-			System.out.println("7. %->empirical");
+			System.out.println("6. particles -> grams");
+			System.out.println("7. empiral->%");
+			System.out.println("8. %->empirical");
 			int choice = readInt();
-			if (choice == -1) {
+			if (choice == -1) { // exit code
 				System.out.println("Goodbye");
 				break;
-			} else if (choice < -1) {
+			} else if (choice < -1) { // invalid
 				System.out.println("Try again, invalid");
 				continue;
-			} else if (choice == 1) {
-				System.out.println("Enter number of moles");
-				double moles = readDouble();
-				unittoX.molestoParticles(moles);
-			} else if (choice == 2) {
-				try {
-					unittoX.gtoParticles();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} else if (choice == 3) {
-		    	System.out.println("Make sure formatting goes as follows: CH4 is formatted as C 1 H 4");
-		    	System.out.println("Enter your chemical formula");
-		    	String st[] = readLine().split(" ");
-		    	System.out.printf("Your molar mass is %f g/mol\n", molarMass.MMcalc(st));
-			} else if (choice == 4) {
+			} else if (choice == 1) { // mole -> particle
+				unittoX.molestoParticles();
+			} else if (choice == 2) { // any mass unit -> particle
+				unittoX.gtoParticles();
+			} else if (choice == 3) { // MM only
+				 molarMass.MMcalc();
+			} else if (choice == 4) { // unit conversion only
 				SIConversion.convert();
-			} else if (choice == 5) {
-				System.out.println("Please enter the number of particles in scientific notation.");
-				System.out.println("Enter the decimal before the multiplication of 10.");
-				double val = readDouble();
-				System.out.println("Enter the exponent ONLY (eg, 10*23 only enter 23)");
-				int exponent = readInt();
+			} else if (choice == 5) { // particles -> moles
+				particlestoX.p2mole();
 			} else if (choice == 6) {
-				percent2emp.p2e();
+				particlestoX.particles2Grams();
 			} else if (choice == 7) {
 				percent2emp.e2p();
 			} else if (choice == 8) {
-				
-			}
+				percent2emp.p2e();
+			} 
 		} 
 		/* TO DO LIST:
 		 * 1. particles to moles, particles to grams

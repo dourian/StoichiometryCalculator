@@ -13,10 +13,24 @@ public class particlestoX extends constants{
 	static double p2mole() throws IOException {
 		System.out.println("Enter the decimal before the mulitplication of 10eX (i.e. 4.5 * 10e4 -> enter only 4.5)");
 		double decimal = readDouble();
-//		System.out.println("Enter the exponent of the 10 (i.e")
-		return 0.0;
+		System.out.println("Enter the exponent of the 10 (i.e 10e3, only enter 3.)");
+		int exponent = readInt();
+		double num = decimal/AVAGADROS_CONSTANT;
+		exponent -= AVAGADROS_EXPONENT;
+		while (exponent > 0) {
+			num *=10;
+		} 
+		while (exponent < 0) {
+			num /= 10;
+		}
+        System.out.printf("Number of moles is %f mol.\n", num);
+		return num;
 	}
-    public static void particles2Grams() {
+    public static void particles2Grams() throws IOException {
+    	double mole = p2mole();
+    	double mm = molarMass.MMcalc();
+    	double massGrams = mole * mm;
+    	System.out.printf("The mass in grams is %f g.", massGrams);
     }
 	static String next() throws IOException {
 		while (st == null || !st.hasMoreTokens())
