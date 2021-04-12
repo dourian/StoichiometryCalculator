@@ -17,6 +17,7 @@ public class Main extends constants{
 			System.out.println("7. empiral->%");
 			System.out.println("8. %->empirical");
 			System.out.println("9. % composition");
+			System.out.println("10. % yield");
 			int choice = reader.readInt();
 			if (choice == -1) { // exit code
 				System.out.println("Goodbye");
@@ -48,6 +49,8 @@ public class Main extends constants{
 				percent2emp.p2e();
 			} else if (choice == 9) {
 		    	percentcomp.percentageComposition();
+			} else if (choice == 10) {
+				
 			}
 		} 
 		/* TO DO LIST:
