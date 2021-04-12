@@ -11,9 +11,7 @@ public class unittoX extends constants{
 	static PrintWriter pr = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 	static StringTokenizer st;
 	static molarMass MM;
-	public static void molestoParticles() throws IOException{
-		System.out.println("Enter number of moles");
-		double moles = readDouble();
+	public static void molestoParticles(double moles) throws IOException{
         double N = moles * AVAGADROS_CONSTANT;
         // we are counting number of decimal places to have smaller calculations
         // without the hassle of such large numbers like 10e23
@@ -48,8 +46,11 @@ public class unittoX extends constants{
     		mass = SIConversion.convert();
     	}
         // n = m / MM
-        double n = mass / molarMass.MMcalc();
-        molestoParticles();
+    	System.out.println("Make sure formatting goes as follows: CH4 is formatted as C 1 H 4");
+    	System.out.println("Enter your chemical formula");
+    	String st_1[] = readLine().split(" ");
+        double n = mass / molarMass.MMcalc(st_1);
+        molestoParticles(n);
         return;
     }
 	static String next() throws IOException {

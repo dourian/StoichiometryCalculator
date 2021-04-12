@@ -8,15 +8,15 @@ public class Main extends constants{
 	public static void main(String[] args) throws Exception {
 		System.out.println("Exit code: -1");
 		while (true) {
-			System.out.println("Type 1 for moles->particles, 2 for <si unit>->particles, 3 for molar mass ONLY");
 			System.out.println("1. moles->particles/atoms");
 			System.out.println("2. <any MASS si unit>->particles/atoms");
 			System.out.println("3. molar mass ONLY");
 			System.out.println("4. unit conversion ONLY");
 			System.out.println("5. particles->moles");
-			System.out.println("6. particles -> grams");
+			System.out.println("6. particles->grams");
 			System.out.println("7. empiral->%");
 			System.out.println("8. %->empirical");
+			System.out.println("9. % composition");
 			int choice = readInt();
 			if (choice == -1) { // exit code
 				System.out.println("Goodbye");
@@ -25,11 +25,17 @@ public class Main extends constants{
 				System.out.println("Try again, invalid");
 				continue;
 			} else if (choice == 1) { // mole -> particle
-				unittoX.molestoParticles();
+				System.out.println("Enter number of moles");
+				double moles = readDouble();
+				unittoX.molestoParticles(moles);
 			} else if (choice == 2) { // any mass unit -> particle
 				unittoX.gtoParticles();
 			} else if (choice == 3) { // MM only
-				 molarMass.MMcalc();
+		    	System.out.println("Make sure formatting goes as follows: CH4 is formatted as C 1 H 4");
+		    	System.out.println("Enter your chemical formula");
+		    	String st[] = readLine().split(" ");
+		    	double MM = molarMass.MMcalc(st);
+		    	System.out.printf("Molar mass is %fg/mol.\n", MM);
 			} else if (choice == 4) { // unit conversion only
 				SIConversion.convert();
 			} else if (choice == 5) { // particles -> moles
@@ -40,7 +46,12 @@ public class Main extends constants{
 				percent2emp.e2p();
 			} else if (choice == 8) {
 				percent2emp.p2e();
-			} 
+			} else if (choice == 9) {
+		    	System.out.println("Make sure formatting goes as follows: CH4 is formatted as C 1 H 4");
+		    	System.out.println("Enter your chemical formula");
+		    	String st[] = readLine().split(" ");
+		    	molarMass.MMcalc(st);
+			}
 		} 
 		/* TO DO LIST:
 		 * 1. particles to moles, particles to grams
@@ -49,15 +60,6 @@ public class Main extends constants{
 		 * 4. percentage comp
 		 */
 	}
-	
-    // wip
-    public static void particles2Moles(double val, int exponent) {
-    	
-    }
-    // wip
-    public static void particles2Grams() {
-    	
-    }
 	static String next() throws IOException {
 		while (st == null || !st.hasMoreTokens())
 			st = new StringTokenizer(br.readLine().trim());

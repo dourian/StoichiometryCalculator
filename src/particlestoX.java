@@ -28,9 +28,12 @@ public class particlestoX extends constants{
 	}
     public static void particles2Grams() throws IOException {
     	double mole = p2mole();
-    	double mm = molarMass.MMcalc();
+    	System.out.println("Make sure formatting goes as follows: CH4 is formatted as C 1 H 4");
+    	System.out.println("Enter your chemical formula");
+    	String st[] = readLine().split(" ");
+    	double mm = molarMass.MMcalc(st);
     	double massGrams = mole * mm;
-    	System.out.printf("The mass in grams is %f g.", massGrams);
+    	System.out.printf("The mass in grams is %f g.\n", massGrams);
     }
 	static String next() throws IOException {
 		while (st == null || !st.hasMoreTokens())
